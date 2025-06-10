@@ -32,3 +32,47 @@ para crear las entidades que les voy a decir a continuación que van a hacer
 - `deletePromt(Promt promt)`
 - `getAll()`
 
+package com.tuapp.daos;
+
+import uce.project.com.cat.anotations.*;
+import com.tuapp.entities.Producto;
+import java.util.List;
+
+@Dao
+public interface ProductoDao {
+    // Consulta todos los productos
+    @Query("select * from Producto")
+    List<Producto> getAll();
+    
+    // Consulta productos activos
+    @Query("select * from Producto where activo = true")
+    List<Producto> getActivos();
+    
+    // Consulta por ID
+    @Query("select * from Producto where id = :id")
+    List<Producto> getById(@P("id") Integer id);
+    
+    // Consulta por nombre (LIKE)
+    @Query("select * from Producto where nombre like :nombre")
+    List<Producto> searchByName(@P("nombre") String nombre);
+    
+    // Insertar producto
+    @Insert
+    boolean insert(Producto producto);
+    
+    // Actualizar producto
+    @Update
+    boolean update(Producto producto);
+    
+    // Eliminar producto
+    @Delete
+    boolean delete(Producto producto);
+}
+
+#Asi se agregan las entidades y los daos a la AppDatabase
+
+@Database(entities = {User.class, Product.class, Song.class}) // parar aqui las entidades ejemplo Song.class
+public interface AppDataBase {
+    public UserDao userDao(); // funcion para acceder al dao
+    public ProductDao productDao(); //otro ejemplo
+}
