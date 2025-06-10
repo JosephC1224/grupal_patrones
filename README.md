@@ -32,43 +32,52 @@ para crear las entidades que les voy a decir a continuación que van a hacer
 - `deletePromt(Promt promt)`
 - `getAll()`
 
-package com.tuapp.daos;
 
-import uce.project.com.cat.anotations.*;
-import com.tuapp.entities.Producto;
-import java.util.List;
 
-@Dao
-public interface ProductoDao {
-    // Consulta todos los productos
-    @Query("select * from Producto")
-    List<Producto> getAll();
+
+# 1. Creación de Entities (Entidades)
+Las entidades representan tablas en tu base de datos. Para crear una:
+
+- Anota la clase con `@Entity`: Especifica el nombre de la tabla.
+- Define los campos: Cada campo representa una columna en la tabla.
+- Anota los campos:
+  - `@ColumnInfo` para columnas normales
+  - `@PrimaryKey` para la clave primaria
+- Usa Lombok (opcional pero recomendado): Para generar getters, constructores, etc.
+
+## Ejemplo completo de Entity:
+
+```java
+package com.tuapp.entities;
+
+import uce.project.com.cat.anotations.Entity;
+import uce.project.com.cat.anotations.PrimaryKey;
+import uce.project.com.cat.anotations.ColumnInfo;
+import lombok.*;
+
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity("Producto") // Nombre de la tabla en la base de datos
+public class Producto {
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoIncrement = true)
+    private Integer id;
     
-    // Consulta productos activos
-    @Query("select * from Producto where activo = true")
-    List<Producto> getActivos();
+    @ColumnInfo(name = "nombre", params = "255")
+    private String nombre;
     
-    // Consulta por ID
-    @Query("select * from Producto where id = :id")
-    List<Producto> getById(@P("id") Integer id);
+    @ColumnInfo(name = "precio")
+    private Double precio;
     
-    // Consulta por nombre (LIKE)
-    @Query("select * from Producto where nombre like :nombre")
-    List<Producto> searchByName(@P("nombre") String nombre);
+    @ColumnInfo(name = "stock")
+    private Integer stock;
     
-    // Insertar producto
-    @Insert
-    boolean insert(Producto producto);
-    
-    // Actualizar producto
-    @Update
-    boolean update(Producto producto);
-    
-    // Eliminar producto
-    @Delete
-    boolean delete(Producto producto);
+    @ColumnInfo(name = "activo")
+    private Boolean activo;
 }
-
 #Asi se agregan las entidades y los daos a la AppDatabase
 
 @Database(entities = {User.class, Product.class, Song.class}) // parar aqui las entidades ejemplo Song.class
