@@ -1,38 +1,63 @@
-Cada integrante del grupo tiene que crear un paquete con su nombre dentro del paquete **uce.project.com**
-ejemplo<br>
-**uce.project.com.baraja**<br>
-dentro de este van a ir las cosas que tienen que implementar **nadie tiene que tocar el codigo fuera de su paquete**
-para este projecto vamos a usar lo que esta en el paquete **uce.project.com.cat**
-para crear las entidades que les voy a decir a continuación que van a hacer<br>
-**Condor:** implementar la entidad <br>
-**User** con el username y password y la **id te tipo integer primary key autoincrement** (esto se hace con anotaciones, abajo les explico como aplicar las anotaciones)
-**UserDao** una interfaz con los siguientes metodos, 
-- **getUsernameById(@P("id") Integer id)**
-- **insertUser(User user);**
-- **updateUser(User user);**
-- **deleteUser(User user);**
-- **getAll();**
-<br>**Baraja** implementar la entidad<br>
-**Song** con nombre, promtId ,genero **id te tipo integer primary key autoincrement** (esto se hace con anotaciones, abajo les explico como aplicar las anotaciones)<br>
-**SongDao** una interfaz con los siguientes metodos,<br>
-- **getSongByID(@P("id") Integer id)**
-- **getSongsByGender((@P("gender")String gender)**
-- **filterByName(@P("name") String name)**
-- **insertSong(Song user);**
-- **updateSong(Song user);**
-- **deleteSong(Song user);**
-- **getAll()**
-<br> **Mateo** implementar la entidad<br>
-**Promt**con promt y  con  **id te tipo integer primary key autoincrement** (esto se hace con anotaciones, abajo les explico como aplicar las anotaciones)
-**PromtDao**: una interfaz con los siguientes métodos:
-- `getPromtByID(@P("id") Integer id)`
-- `filterByWord(@P("word") String word)`
-- `insertPromt(Promt promt)`
-- `updatePromt(Promt promt)`
-- `deletePromt(Promt promt)`
-- `getAll()`
+Cada integrante del grupo debe crear un paquete con su nombre dentro del paquete **uce.project.com**.  
+Por ejemplo:  
+**uce.project.com.baraja**  
 
-<br>
+Dentro de este paquete deben implementar su código, **nadie debe modificar código fuera de su paquete**.
+
+Para este proyecto utilizaremos lo que está en el paquete **uce.project.com.cat** para crear las entidades que les indicaré a continuación.
+
+---
+
+### Condor
+- Implementar la entidad **User** con los siguientes campos:  
+  - `username`  
+  - `password`  
+  - `id` de tipo `integer primary key autoincrement` (esto se hace con anotaciones, al final explico cómo aplicarlas).
+
+- Implementar la interfaz **UserDao** con los siguientes métodos:
+  - `getUsernameById(@P("id") Integer id)`
+  - `insertUser(User user)`
+  - `updateUser(User user)`
+  - `deleteUser(User user)`
+  - `getAll()`
+
+---
+
+### Baraja
+- Implementar la entidad **Song** con los siguientes campos:  
+  - `nombre`  
+  - `promtId`  
+  - `genero`  
+  - `id` de tipo `integer primary key autoincrement` (con anotaciones).
+
+- Implementar la interfaz **SongDao** con los siguientes métodos:
+  - `getSongByID(@P("id") Integer id)`
+  - `getSongsByGender(@P("gender") String gender)`
+  - `filterByName(@P("name") String name)`
+  - `insertSong(Song song)`
+  - `updateSong(Song song)`
+  - `deleteSong(Song song)`
+  - `getAll()`
+
+---
+
+### Mateo
+- Implementar la entidad **Promt** con los siguientes campos:  
+  - `promt`  
+  - `id` de tipo `integer primary key autoincrement` (con anotaciones).
+
+- Implementar la interfaz **PromtDao** con los siguientes métodos:
+  - `getPromtByID(@P("id") Integer id)`
+  - `filterByWord(@P("word") String word)`
+  - `insertPromt(Promt promt)`
+  - `updatePromt(Promt promt)`
+  - `deletePromt(Promt promt)`
+  - `getAll()`
+
+---
+
+
+
 
 
 # 1. Creación de Entities (Entidades) <br>
