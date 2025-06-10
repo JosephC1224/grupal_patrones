@@ -78,6 +78,60 @@ public class Producto {
     @ColumnInfo(name = "activo")
     private Boolean activo;
 }
+
+## 2. Creación de DAOs (Data Access Objects)
+
+Los DAOs (Data Access Objects) son interfaces que definen las operaciones CRUD sobre las entidades.
+
+### Configuración básica:
+
+- Anota la interfaz con `@Dao`
+- Define métodos con las anotaciones adecuadas:
+  - `@Query` para consultas SQL personalizadas
+  - `@Insert` para operaciones de inserción
+  - `@Update` para operaciones de actualización
+  - `@Delete` para operaciones de eliminación
+- Usa `@P` para parámetros en consultas nombradas
+
+### Ejemplo completo de DAO:
+
+```java
+package com.tuapp.daos;
+
+import uce.project.com.cat.anotations.*;
+import com.tuapp.entities.Producto;
+import java.util.List;
+
+@Dao
+public interface ProductoDao {
+    // Consulta todos los productos
+    @Query("SELECT * FROM Producto")
+    List<Producto> getAll();
+    
+    // Consulta productos activos
+    @Query("SELECT * FROM Producto WHERE activo = true")
+    List<Producto> getActivos();
+    
+    // Consulta por ID
+    @Query("SELECT * FROM Producto WHERE id = :id")
+    List<Producto> getById(@P("id") Integer id);
+    
+    // Consulta por nombre (usando LIKE)
+    @Query("SELECT * FROM Producto WHERE nombre LIKE :nombre")
+    List<Producto> searchByName(@P("nombre") String nombre);
+    
+    // Insertar producto
+    @Insert
+    boolean insert(Producto producto);
+    
+    // Actualizar producto
+    @Update
+    boolean update(Producto producto);
+    
+    // Eliminar producto
+    @Delete
+    boolean delete(Producto producto);
+}
 #Asi se agregan las entidades y los daos a la AppDatabase
 
 @Database(entities = {User.class, Product.class, Song.class}) // parar aqui las entidades ejemplo Song.class
